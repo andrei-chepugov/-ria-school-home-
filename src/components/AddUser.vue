@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    onSubmit: function (event) {
+    onSubmit: function () {
       this.$emit('AddUser', {
         name: this.name,
         email: this.email,
