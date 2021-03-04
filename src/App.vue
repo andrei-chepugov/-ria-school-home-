@@ -3,10 +3,10 @@
     <div class="w-75 p-3">
       <h2>Інформація про користувача</h2>
       <hr>
-      <AddUser/>
+      <AddUser @AddUser="onAddUser"/>
       <hr>
-      <p class="text-lg-left">Кількість користувачів: <b>0</b></p>
-      <UserList/>
+      <p class="text-lg-left">Кількість користувачів: <b>{{ users.length }}</b></p>
+      <UserList v-bind:users="users"/>
     </div>
   </div>
 </template>
@@ -14,6 +14,7 @@
 <script>
 import AddUser from "@/components/AddUser";
 import UserList from "@/components/UserList";
+
 export default {
   name: 'App',
   components: {
@@ -23,6 +24,12 @@ export default {
   data() {
     return {
       users: []
+    }
+  },
+  methods: {
+    onAddUser: function (payload) {
+      this.users.push(payload);
+
     }
   }
 }

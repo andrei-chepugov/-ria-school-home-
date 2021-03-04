@@ -9,19 +9,25 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+    <tr v-for="(user, i) in users">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ capitalize(user.name) }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.age }}</td>
     </tr>
     </tbody>
   </table>
 </template>
 
 <script>
+const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+
 export default {
-name: "UserList"
+  name: "UserList",
+  props: ['users'],
+  methods: {
+    capitalize: capitalizeFirstLetter
+  }
 }
 </script>
 
