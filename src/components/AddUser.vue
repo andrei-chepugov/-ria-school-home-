@@ -70,7 +70,7 @@ export default {
       return Boolean(this.email.length);
     },
     isAgeInvalid: function () {
-      return !this.age.length || this.age.length > 3 || Number.isNaN(Number(this.age));
+      return !this.age.trim().length || this.age.length > 3 || Number.isNaN(Number(this.age));
     },
     isAgeNonEmpty: function () {
       return Boolean(this.age.length);
