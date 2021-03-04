@@ -57,27 +57,33 @@ export default {
     }
   },
   computed: {
-    errorName: function () {
-      return this.name.length > 20;
+    isNameInvalid: function () {
+      return !this.name.length || this.name.length > 20;
     },
-    errorEmail: function () {
-      return !validEmail(this.email);
+    isNameNonEmpty: function () {
+      return Boolean(this.name.length);
+    },
+    isEmailInvalid: function () {
+      return !this.email.length || !validEmail(this.email);
     },
     isEmailNonEmpty: function () {
-      return this.email.length;
+      return Boolean(this.email.length);
     },
-    errorAge: function () {
-      return this.age.length > 3 || Number.isNaN(Number(this.age));
+    isAgeInvalid: function () {
+      return !this.age.length || this.age.length > 3 || Number.isNaN(Number(this.age));
+    },
+    isAgeNonEmpty: function () {
+      return Boolean(this.age.length);
     },
     errors: function () {
       return {
-        name: this.errorName,
-        email: this.isEmailNonEmpty && this.errorEmail,
-        age: this.errorAge
+        name: this.isNameNonEmpty && this.isNameInvalid,
+        email: this.isEmailNonEmpty && this.isEmailInvalid,
+        age: this.isAgeNonEmpty && this.isAgeInvalid
       }
     },
     invalid: function () {
-      return this.errorName || this.errorEmail || this.errorAge
+      return this.isNameInvalid || this.isEmailInvalid || this.isAgeInvalid
     }
   },
 }
