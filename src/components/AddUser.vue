@@ -7,7 +7,7 @@
           <input type="text" class="form-control" placeholder="Your Name" v-model="name">
         </div>
         <div class="col-sm-5">
-          <input type="text" class="form-control" placeholder="Your Email" v-model="email">
+          <input type="text" class="form-control" placeholder="Your Email" v-model="email" @change="onEmailChange">
         </div>
         <div class="col-sm">
           <input type="text" class="form-control" placeholder="Your Age" v-model="age">
@@ -38,7 +38,8 @@ export default {
     return {
       name: '',
       email: '',
-      age: ''
+      age: '',
+      showEmailInvalid: false
     }
   },
   methods: {
@@ -49,6 +50,9 @@ export default {
         age: Number(this.age)
       })
       this.clean();
+    },
+    onEmailChange: function () {
+      this.showEmailInvalid = this.isEmailInvalid && this.isEmailNonEmpty;
     },
     clean: function () {
       this.name = '';
@@ -78,7 +82,7 @@ export default {
     errors: function () {
       return {
         name: this.isNameNonEmpty && this.isNameInvalid,
-        email: this.isEmailNonEmpty && this.isEmailInvalid,
+        email: this.showEmailInvalid,
         age: this.isAgeNonEmpty && this.isAgeInvalid
       }
     },
@@ -86,6 +90,11 @@ export default {
       return this.isNameInvalid || this.isEmailInvalid || this.isAgeInvalid
     }
   },
+  watch: {
+    email: function () {
+      this.showEmailInvalid = false;
+    }
+  }
 }
 </script>
 
